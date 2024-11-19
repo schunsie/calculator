@@ -1,6 +1,11 @@
+let number1 = '';
+let operator = '';
+let number2 = '';
+
 const calc = document.querySelector('.calc-result');
 const calcHistory = document.querySelector('.calc-history');
 const keypad = document.querySelector('.keypad');
+
 
 keypad.addEventListener('click', (event) => {
     const target = event.target;
@@ -19,18 +24,23 @@ function processBtn(button) {
         switch (key) {
             case 'DEL':
                 deleteItem();
-                break;
+                return;
             case 'CE':
                 clearEntry();
-                break;
+                return;
             case 'C':
                 clearAll();
-                break;
+                return;
             case '=':
                 processCalculation()
+                return;
         }
     }
-    else {
+    else if (!operator && '-+/*'.includes(key)) {
+        if (initCalcVars(key, true)) populateScreen(key);
+    }
+    else if ('0123456789.'.includes(key)) {
+        initCalcVars(key);
         populateScreen(key);
     }
 }
@@ -41,10 +51,13 @@ function populateScreen(item) {
 
 function clearEntry() {
     calc.textContent = '';
+    number1 = '';
+    number2 = '';
+    operator = '';
 }
 
 function clearAll() {
-    calc.textContent = '';
+    clearEntry();
     calcHistory.textContent = '';
 }
 
@@ -52,21 +65,24 @@ function deleteItem() {
     calc.textContent = calc.textContent.slice(0, -1);
 }
 
-function processCalculation() {
-    const calculation = calc.textContent;
-    displayCalcHistory(calculation);
-
-    calculation.split('+-*/');
-    console.log(calculation);
-}
-
 function populateCalcHistory(calculation) {
     calcHistory.textContent = calculation;
 }
 
-let number1;
-let operator;
-let number2;
+function initCalcVars(key, op=false) {
+    if (op) {
+        operator = key
+        return true
+    }
+
+    if (!operator) {
+        number1 += key;
+    }
+    else {
+        number2 += key;
+    }
+}
+
 
 function operate(num1, op, num2) {
     switch (op) {
@@ -97,4 +113,12 @@ function multiply(a, b) {
 
 function divide(a, b) {
     return a / b;
+}
+
+function processCalculation() {
+    calcHistory.textContent = calc.textContent;
+    const result = operate(+number1, operator, +number2);
+
+    calc.textContent = result;
+
 }

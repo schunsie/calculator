@@ -58,6 +58,7 @@ body {
     flex-shrink: 0;
     cursor: pointer;
     box-shadow: 4px 4px black;
+    background-color: rgb(57, 158, 128);
 }
 
 .darken {
