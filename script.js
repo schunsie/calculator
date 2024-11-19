@@ -51,9 +51,7 @@ function populateScreen(item) {
 
 function clearEntry() {
     calc.textContent = '';
-    number1 = '';
-    number2 = '';
-    operator = '';
+    resetCalcVars(total=true);
 }
 
 function clearAll() {
@@ -81,6 +79,12 @@ function initCalcVars(key, op=false) {
     else {
         number2 += key;
     }
+}
+
+function resetCalcVars(total=false) {
+    if (total) number1 = '';
+    number2 = '';
+    operator = '';
 }
 
 
@@ -120,5 +124,7 @@ function processCalculation() {
     const result = operate(+number1, operator, +number2);
 
     calc.textContent = result;
+    number1 = result;
+    resetCalcVars()
 
 }
