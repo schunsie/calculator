@@ -12,7 +12,7 @@ keypad.addEventListener('click', (event) => {
 });
 
 function processBtn(button) {
-    const options = ['DEL', 'C', 'CE'];
+    const options = ['DEL', 'C', 'CE', '='];
     const key = button.textContent;
 
     if (options.includes(key)) {
@@ -26,6 +26,8 @@ function processBtn(button) {
             case 'C':
                 clearAll();
                 break;
+            case '=':
+                processCalculation()
         }
     }
     else {
@@ -50,6 +52,17 @@ function deleteItem() {
     calc.textContent = calc.textContent.slice(0, -1);
 }
 
+function processCalculation() {
+    const calculation = calc.textContent;
+    displayCalcHistory(calculation);
+
+    calculation.split('+-*/');
+    console.log(calculation);
+}
+
+function populateCalcHistory(calculation) {
+    calcHistory.textContent = calculation;
+}
 
 let number1;
 let operator;
