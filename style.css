@@ -16,7 +16,7 @@ body {
 
 .calculator {
     width: 500px;
-    height: 750px;
+    height: 760px;
     box-shadow: 0px 0px 12px 1px black;
     background-color: rgb(30, 175, 132);
 }
@@ -24,9 +24,12 @@ body {
 .screen {
     background-color: rgb(27, 131, 114);
     padding: 32px;
+    overflow: hidden;
+    height: 160px;
 }
 
 .calc-result {
+    margin-top: 8px;
     font-size: 3rem;
     text-align: right;
 }
