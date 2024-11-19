@@ -1,4 +1,5 @@
 const calc = document.querySelector('.calc-result');
+const calcHistory = document.querySelector('.calc-history');
 const keypad = document.querySelector('.keypad');
 
 keypad.addEventListener('click', (event) => {
@@ -6,12 +7,47 @@ keypad.addEventListener('click', (event) => {
     if (Array.from(target.classList).includes('keypad')) {
         return;
     }
-
-    populateScreen(target.textContent);
+    
+    processBtn(target);
 });
 
-function populateScreen(number) {
-    calc.textContent += number;
+function processBtn(button) {
+    const options = ['DEL', 'C', 'CE'];
+    const key = button.textContent;
+
+    if (options.includes(key)) {
+        switch (key) {
+            case 'DEL':
+                deleteItem();
+                break;
+            case 'CE':
+                clearEntry();
+                break;
+            case 'C':
+                clearAll();
+                break;
+        }
+    }
+    else {
+        populateScreen(key);
+    }
+}
+
+function populateScreen(item) {
+    calc.textContent += item;
+}
+
+function clearEntry() {
+    calc.textContent = '';
+}
+
+function clearAll() {
+    calc.textContent = '';
+    calcHistory.textContent = '';
+}
+
+function deleteItem() {
+    calc.textContent = calc.textContent.slice(0, -1);
 }
 
 
