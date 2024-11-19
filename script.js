@@ -60,7 +60,9 @@ function clearAll() {
 }
 
 function deleteItem() {
-    calc.textContent = calc.textContent.slice(0, -1);
+    if (!operator || number2) calc.textContent = calc.textContent.slice(0, -1);
+    if (!operator) number1 = number1.slice(0, -1);
+    else number2 = number2.slice(0, -1);
 }
 
 function populateCalcHistory(calculation) {
@@ -124,7 +126,7 @@ function processCalculation() {
     const result = operate(+number1, operator, +number2);
 
     calc.textContent = result;
-    number1 = result;
+    number1 = `${result}`;
     resetCalcVars()
 
 }
