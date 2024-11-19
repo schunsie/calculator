@@ -36,6 +36,9 @@ body {
     bottom: 32px;
 }
 
+.calc-history {
+    font-size: 2em;
+}
 
 .keypad {
     display: flex;

@@ -122,7 +122,7 @@ function divide(a, b) {
 }
 
 function processCalculation() {
-    calcHistory.textContent = calc.textContent;
+    calcHistory.textContent = `${calc.textContent}=`;
     const result = operate(+number1, operator, +number2);
 
     calc.textContent = result;
