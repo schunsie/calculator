@@ -93,7 +93,7 @@ function operate(num1, op, num2) {
         case '/':
             return divide(num1, num2);
         default:
-            return 'ERROR'
+            return num1;
     }
 }
 
