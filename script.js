@@ -25,8 +25,9 @@ function processBtn(button) {
     else if (key == 'CE') clearEntry();
     else if (key == '=') processCalculation();
 
-    else if (!operator && '-+/*'.includes(key)) {
-        initCalcVars(key, true);
+    else if ('-+/*'.includes(key)) {
+        if (operator) processCalculation();
+        initCalcVars(key, true); 
     }
     else if ('0123456789.'.includes(key)) {
         initCalcVars(key);
