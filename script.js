@@ -115,9 +115,22 @@ function divide(a, b) {
 
 function processCalculation() {
     calcHistory.textContent = `${calc.textContent}=`;
-    const result = operate(+number1, operator, +number2);
+    let result = operate(+number1, operator, +number2);
+    if (isLongFloat(result)) result = roundToFourDecimals(result);
 
     calc.textContent = result;
     resetCalcVars()
     number1 = `${result}`;
 }
+
+
+function isLongFloat(num) {
+    if (num % 1 === 0) return false;
+    
+    const decimals = num.toString().split('.')[1]
+    if (decimals.length > 4) return true; 
+}
+
+ function roundToFourDecimals(float_num) {
+    return parseFloat(float_num.toFixed(4));
+ }
