@@ -20,37 +20,29 @@ function processBtn(button) {
     const options = ['DEL', 'C', 'CE', '='];
     const key = button.textContent;
 
-    if (options.includes(key)) {
-        switch (key) {
-            case 'DEL':
-                deleteItem();
-                return;
-            case 'CE':
-                clearEntry();
-                return;
-            case 'C':
-                clearAll();
-                return;
-            case '=':
-                processCalculation()
-                return;
-        }
-    }
+    if (key == 'DEL') deleteItem();
+    else if (key == 'C') clearAll();
+    else if (key == 'CE') clearEntry();
+    else if (key == '=') processCalculation();
+
     else if (!operator && '-+/*'.includes(key)) {
-        if (initCalcVars(key, true)) populateScreen(key);
+        initCalcVars(key, true);
     }
     else if ('0123456789.'.includes(key)) {
         initCalcVars(key);
-        populateScreen(key);
     }
+    else return 'Error';
+    populateScreen(number1, operator, number2);
 }
 
-function populateScreen(item) {
-    calc.textContent += item;
+function populateScreen(...items) {
+    calc.textContent = '';
+    items.forEach( (item) => {
+        calc.textContent += item;
+    });
 }
 
 function clearEntry() {
-    calc.textContent = '';
     resetCalcVars();
 }
 
@@ -60,7 +52,6 @@ function clearAll() {
 }
 
 function deleteItem() {
-    if (!operator || number2) calc.textContent = calc.textContent.slice(0, -1);
     if (!operator) number1 = number1.slice(0, -1);
     else number2 = number2.slice(0, -1);
 }
@@ -72,7 +63,7 @@ function populateCalcHistory(calculation) {
 function initCalcVars(key, op=false) {
     if (op) {
         operator = key
-        return true
+        return;
     }
 
     if (!operator) {
@@ -128,5 +119,4 @@ function processCalculation() {
     calc.textContent = result;
     resetCalcVars()
     number1 = `${result}`;
-
 }
