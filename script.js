@@ -14,11 +14,11 @@ keypad.addEventListener('click', (event) => {
         return;
     }
     
-    processBtn(target);
+    const key = target.textContent;
+    processBtn(key);
 });
 
-function processBtn(button) {
-    const key = button.textContent;
+function processBtn(key) {
 
     if (key == 'DEL') deleteItem();
     else if (key == 'C') clearAll();
@@ -142,5 +142,18 @@ function errorHandling() {
 function checkForDecimal() {
     if (number2.includes('.')) return true;
     else if (!operator && number1.includes('.')) return true;
+    return false;
+}
+
+// keyboard support
+
+document.addEventListener('keydown', (event) => {
+    console.log(event.key);
+    console.log(typeof(event.key));
+    if (validateKeyboardInput(event.key)) processBtn(event.key);
+});
+
+function validateKeyboardInput(key) {
+    if (!isNaN(key) || '+-/+'.includes(key)) return true;
     return false;
 }
