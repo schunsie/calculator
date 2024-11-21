@@ -1,6 +1,7 @@
 let number1 = '';
 let operator = '';
 let number2 = '';
+let error = false;
 
 const calc = document.querySelector('.calc-result');
 const calcHistory = document.querySelector('.calc-history');
@@ -31,8 +32,10 @@ function processBtn(button) {
     else if ('0123456789.'.includes(key)) {
         initCalcVars(key);
     }
-    else return 'Error';
-    populateScreen(number1, operator, number2);
+    else error = true;
+    
+    if (!error) populateScreen(number1, operator, number2);
+    else errorHandling();
 }
 
 function populateScreen(...items) {
@@ -89,7 +92,7 @@ function operate(num1, op, num2) {
         case '*':
             return multiply(num1, num2);
         case '/':
-            return divide(num1, num2);
+            return num2 !== 0 ? divide(num1, num2) : 'error'; 
         default:
             return num1;
     }
@@ -114,11 +117,11 @@ function divide(a, b) {
 function processCalculation() {
     calcHistory.textContent = `${calc.textContent}=`;
     let result = operate(+number1, operator, +number2);
-    if (isLongFloat(result)) result = roundToFourDecimals(result);
+    if (result === 'error') error = '0Division';
+    else if (isLongFloat(result)) result = roundToFourDecimals(result);
 
-    calc.textContent = result;
     resetCalcVars()
-    number1 = `${result}`;
+    if (!error) number1 = `${result}`;
 }
 
 function isLongFloat(num) {
@@ -130,4 +133,10 @@ function isLongFloat(num) {
 
  function roundToFourDecimals(float_num) {
     return parseFloat(float_num.toFixed(4));
- }
+}
+
+function errorHandling() {
+    if (error = '0Division') populateScreen('No, thank you');
+    else populateScreen('Invalid action');
+    error = false;
+}
