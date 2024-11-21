@@ -20,10 +20,10 @@ keypad.addEventListener('click', (event) => {
 
 function processBtn(key) {
 
-    if (key == 'DEL' || key === 'Backspace') deleteItem();
-    else if (key == 'C') clearAll();
-    else if (key == 'CE') resetCalcVars();
-    else if (key == '=' || key === 'Enter') processCalculation();
+    if (key === 'DEL' || key === 'Backspace') deleteItem();
+    else if (key === 'C') clearAll();
+    else if (key === 'CE') resetCalcVars();
+    else if (key === '=' || key === 'Enter') processCalculation();
 
     else if ('-+/*'.includes(key)) {
         if (operator) processCalculation();
