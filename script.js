@@ -20,10 +20,10 @@ keypad.addEventListener('click', (event) => {
 
 function processBtn(key) {
 
-    if (key == 'DEL') deleteItem();
+    if (key == 'DEL' || key === 'Backspace') deleteItem();
     else if (key == 'C') clearAll();
     else if (key == 'CE') resetCalcVars();
-    else if (key == '=') processCalculation();
+    else if (key == '=' || key === 'Enter') processCalculation();
 
     else if ('-+/*'.includes(key)) {
         if (operator) processCalculation();
@@ -154,6 +154,9 @@ document.addEventListener('keydown', (event) => {
 });
 
 function validateKeyboardInput(key) {
-    if (!isNaN(key) || '+-/*'.includes(key)) return true;
+    if (!isNaN(key) 
+        || '+-/*'.includes(key) 
+        || ['Enter', 'Backspace'].includes(key)
+    ) return true;
     return false;
 }
