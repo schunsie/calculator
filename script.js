@@ -17,7 +17,6 @@ keypad.addEventListener('click', (event) => {
 });
 
 function processBtn(button) {
-    const options = ['DEL', 'C', 'CE', '='];
     const key = button.textContent;
 
     if (key == 'DEL') deleteItem();
@@ -81,7 +80,6 @@ function resetCalcVars() {
     operator = '';
 }
 
-
 function operate(num1, op, num2) {
     switch (op) {
         case '+':
@@ -122,7 +120,6 @@ function processCalculation() {
     resetCalcVars()
     number1 = `${result}`;
 }
-
 
 function isLongFloat(num) {
     if (num % 1 === 0) return false;
