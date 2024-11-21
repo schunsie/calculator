@@ -29,9 +29,10 @@ function processBtn(button) {
         if (operator) processCalculation();
         initCalcVars(key, true); 
     }
-    else if ('0123456789.'.includes(key)) {
+    else if ('0123456789'.includes(key)) {
         initCalcVars(key);
     }
+    else if (key === '.') !checkForDecimal() ? initCalcVars(key) : key = '';
     else error = true;
     
     if (!error) populateScreen(number1, operator, number2);
@@ -135,4 +136,10 @@ function errorHandling() {
     if (error = '0Division') populateScreen('No, thank you');
     else populateScreen('Invalid action');
     error = false;
+}
+
+function checkForDecimal() {
+    if (number2.includes('.')) return true;
+    else if (!operator && number1.includes('.')) return true;
+    return false;
 }
