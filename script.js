@@ -47,7 +47,7 @@ function populateScreen(...items) {
 }
 
 function clearAll() {
-    clearEntry();
+    resetCalcVars();
     calcHistory.textContent = '';
 }
 
