@@ -53,6 +53,7 @@ function clearAll() {
 
 function deleteItem() {
     if (!operator) number1 = number1.slice(0, -1);
+    else if (!number2) operator = '';
     else number2 = number2.slice(0, -1);
 }
 
