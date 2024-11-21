@@ -22,7 +22,7 @@ function processBtn(button) {
 
     if (key == 'DEL') deleteItem();
     else if (key == 'C') clearAll();
-    else if (key == 'CE') clearEntry();
+    else if (key == 'CE') resetCalcVars();
     else if (key == '=') processCalculation();
 
     else if ('-+/*'.includes(key)) {
@@ -43,10 +43,6 @@ function populateScreen(...items) {
     items.forEach( (item) => {
         calc.textContent += item;
     });
-}
-
-function clearEntry() {
-    resetCalcVars();
 }
 
 function clearAll() {
