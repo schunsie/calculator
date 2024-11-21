@@ -154,6 +154,6 @@ document.addEventListener('keydown', (event) => {
 });
 
 function validateKeyboardInput(key) {
-    if (!isNaN(key) || '+-/+'.includes(key)) return true;
+    if (!isNaN(key) || '+-/*'.includes(key)) return true;
     return false;
 }
